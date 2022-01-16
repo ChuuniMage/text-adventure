@@ -118,11 +118,7 @@ val itemProps = SenseProps(
   "The desk tastes like grime and dust.", 
   "The wood of the desk feels slightly coarse.")
 
-// class Item(val name:String,val props: SenseProps){
-//   def sense = (command:ValidCommand) => {
-//     props.smell
-//   }
-// }
+
 
 val desk_props = SenseProps("The desk is wooden.","The desk smells like fresh pine needles.")
 val desk = Item("desk",desk_props)
