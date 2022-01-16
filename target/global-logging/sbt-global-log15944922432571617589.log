@@ -1,0 +1,3 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(eval 2+2, Some(d5418c65-9ba4-48a4-9f9f-f893aea6a4e2), Some(CommandSource(console0)))[0m
+[0m[[0m[0minfo[0m] [0m[0mans: Int = 4[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
