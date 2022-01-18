@@ -22,14 +22,33 @@
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
 [0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\target\scala-3.1.0\classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.1.0\scala3-sbt-bridge-3.1.0.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2de35d55 for Scala Compiler version 3.1.0[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 4ccb4fcc for Scala Compiler version 3.1.0[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.1.0\scala3-library_3-3.1.0.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.6\scala-library-2.13.6.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\target\scala-3.1.0\classes;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-prelude_3\1.0.0-RC5\zio-prelude_3-1.0.0-RC5.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio_3\1.0.8\zio_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-test_3\1.0.8\zio-test_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-stacktracer_3\1.0.8\zio-stacktracer_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\izumi-reflect_3\1.1.2\izumi-reflect_3-1.1.2.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-streams_3\1.0.8\zio-streams_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\portable-scala\portable-scala-reflect_2.13\1.1.1\portable-scala-reflect_2.13-1.1.1.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\izumi-reflect-thirdparty-boopickle-shaded_3\1.1.2\izumi-reflect-thirdparty-boopickle-shaded_3-1.1.2.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 5.2442322 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 4.9533133 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from text_adventure.HasItems...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: text_adventure.HasItems[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding text_adventure.Room by text_adventure.HasItems[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(text_adventure.HasItems, text_adventure.Room)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(text_adventure.HasItems,ModifiedNames(changes = UsedName(##,[Default]), UsedName(wait,[Default]), UsedName(notify,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getItem,[Default]), UsedName(equals,[Default]), UsedName(hashCode,[Default]), UsedName(itemNotFoundMsg,[Default]), UsedName(HasItems,[Default]), UsedName($isInstanceOf,[Default]), UsedName(asInstanceOf,[Default]), UsedName(finalize,[Default]), UsedName(!=,[Default]), UsedName(HasItems;init;,[Default]), UsedName($asInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(==,[Default]), UsedName(toString,[Default]), UsedName(synchronized,[Default]), UsedName(notifyAll,[Default]), UsedName(clone,[Default]), UsedName(eq,[Default]), UsedName(items,[Default]), UsedName(ne,[Default]), UsedName(Object;init;,[Default]))) invalidates 2 classes due to The text_adventure.HasItems has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(##,[Default]), UsedName(wait,[Default]), UsedName(notify,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getItem,[Default]), UsedName(equals,[Default]), UsedName(hashCode,[Default]), UsedName(itemNotFoundMsg,[Default]), UsedName(HasItems,[Default]), UsedName($isInstanceOf,[Default]), UsedName(asInstanceOf,[Default]), UsedName(finalize,[Default]), UsedName(!=,[Default]), UsedName(HasItems;init;,[Default]), UsedName($asInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(==,[Default]), UsedName(toString,[Default]), UsedName(synchronized,[Default]), UsedName(notifyAll,[Default]), UsedName(clone,[Default]), UsedName(eq,[Default]), UsedName(items,[Default]), UsedName(ne,[Default]), UsedName(Object;init;,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > by transitive inheritance: Set(text_adventure.HasItems, text_adventure.Room)[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > [0m
+[0m[[0m[0mdebug[0m] [0m[0m  > [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from text_adventure.Room...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: text_adventure.Room[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(text_adventure.Room)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(text_adventure.Room,ModifiedNames(changes = UsedName(Room,[Default]), UsedName(items,[Default]), UsedName(itemNotFoundMsg,[Default]), UsedName(HasItems;init;,[Default]))) invalidates 1 classes due to The text_adventure.Room has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(Room,[Default]), UsedName(items,[Default]), UsedName(itemNotFoundMsg,[Default]), UsedName(HasItems;init;,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > by transitive inheritance: Set(text_adventure.Room)[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > [0m
+[0m[[0m[0mdebug[0m] [0m[0m  > [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
 [0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m

@@ -16,7 +16,6 @@ import scala.io.StdIn
 
 class State[TempData, StateObjects](val tempData:TempData, val stateObjects:StateObjects)
 
-
 def roomState_loop = text_adventure_state_loop(doActionInRoom)
 
 def validateInput = (input:String) => 
@@ -140,6 +139,8 @@ case class Item(override val name:String,override val senseProps: SenseProps) ex
 
 trait Named(val name:String)
 
+//TODO: Have some "fundamental" command typing
+//Maybe case classes instead of enums, or enums at the bottom with case classes holding them
 trait Sensible(val senseProps:SenseProps){
   def sense = (cmd:ValidCommand) => cmd match
     case ValidCommand.Look => senseProps.look
@@ -150,14 +151,17 @@ trait Sensible(val senseProps:SenseProps){
     case _ => "That's not a sense!"
 }
 
+trait HasItems(val items:List[Item], val itemNotFoundMsg:String){ 
+  def getItem = (name:String) => items.find(_.name == name) match 
+      case Some(item) => Right(item)
+      case None => Left(itemNotFoundMsg)
+    }
+      
 case class Room(
   val name:String, 
   val description:String,
-  val items:List[Item]) {
-    def actOnItem = actOnItemInList_generic("That object is not in this room.")(items)
-    def getItem = (name:String) => items.find(_.name == name) match 
-      case Some(item) => Right(item)
-      case None => Left("That item is not in this room.")
+  override val items:List[Item]) extends HasItems(items, "That item is not in this room.") {
+
 }
 
 val barrel_props = SenseProps(
@@ -199,9 +203,8 @@ case class RoomDirectory(val roomList:List[(Room,List[Room])]){
 
 val lint = Item("lint",SenseProps("Looks fuzzy.","Smells extremely dusty."))
 
-class Inventory(val itemList:List[Item]) {
-  def actOnItem = actOnItemInList_generic("You do not have that item in your inventory.")(itemList)
-}
+case class Inventory(override val items:List[Item]) 
+  extends HasItems(items, "That item is not in your inventory.") 
 
 val inventory = Inventory(List(lint))
 

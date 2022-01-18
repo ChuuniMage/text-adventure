@@ -134,6 +134,7 @@
 [0m[[0m[0mdebug[0m] [0m[0m	SensibleObjects$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Arity.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ValidCommand$$anon$4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	HasItems.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SenseProps.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	hello.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ValidCommand$$anon$3.class[0m
@@ -164,6 +165,7 @@
 [0m[[0m[0mdebug[0m] [0m[0m	SensibleObjects$.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Arity.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ValidCommand$$anon$4.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	HasItems.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SenseProps.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	hello.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ValidCommand$$anon$3.tasty[0m
