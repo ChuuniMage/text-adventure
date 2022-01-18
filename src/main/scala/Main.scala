@@ -85,6 +85,10 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), state:State[St
       case 1 => Some(Arity.Unary)
       case _ => None
 
+  lazy val senseItem = room.getItem(list(0)) match
+          case Left(string) => State(string,state.stateObjects)
+          case Right(item) => State(item.sense(command),state.stateObjects)
+
   arity match
     case Some(arity) => arity match
       case Arity.Nullary => command match 
@@ -102,13 +106,11 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), state:State[St
         case ValidCommand.Go => directory.navigate(room, list(0))    
         case ValidCommand.Look => if list(0) == "room" || list(0) == room.name
           then State(room.description + "\n" + "What will you do? \n", state.stateObjects) 
-          else State(room.actOnItem(command_tuple),state.stateObjects)
-        case ValidCommand.Smell => room.getItem(list(0)) match
-          case Left(string) => State(string,state.stateObjects)
-          case Right(item) => State(item.sense(command),state.stateObjects)
-        case ValidCommand.Taste =>  State(room.actOnItem(command_tuple),state.stateObjects)
-        case ValidCommand.Touch =>  State(room.actOnItem(command_tuple),state.stateObjects)
-        case ValidCommand.Hear =>  State(room.actOnItem(command_tuple),state.stateObjects)
+          else senseItem
+        case ValidCommand.Smell => senseItem
+        case ValidCommand.Taste => senseItem
+        case ValidCommand.Touch => senseItem
+        case ValidCommand.Hear =>  senseItem
     case None => State("Too many commands! Type less things.\n", state.stateObjects)
 
 def actOnItemInList_generic = (itemNotFound:String) => (items:List[Item]) => 
@@ -123,12 +125,10 @@ def actOnItemInList_generic = (itemNotFound:String) => (items:List[Item]) =>
             case None => itemNotFound
     
 case class SensibleObjects(val objects:List[Sensible & Named]){
- def sense = (command:ValidCommand,name:String) => command match
-   case ValidCommand.Look => objects.find(_.name == name)
-   case ValidCommand.Smell => ""
-   case _ => "That's not a sense!"
+ def getObject = (command:ValidCommand,name:String) => objects.find(_.name == name) match
+   case Some(item) => item.sense(command)
+   case None => "You cannot sense that item in this room."
 }
-
 
 class SenseProps(val look:String = "You cannot see it with your eyes.", 
     val smell:String = "It doesn't have a smell.", 
@@ -139,6 +139,7 @@ class SenseProps(val look:String = "You cannot see it with your eyes.",
 case class Item(override val name:String,override val senseProps: SenseProps) extends Named(name), Sensible(senseProps)
 
 trait Named(val name:String)
+
 trait Sensible(val senseProps:SenseProps){
   def sense = (cmd:ValidCommand) => cmd match
     case ValidCommand.Look => senseProps.look
