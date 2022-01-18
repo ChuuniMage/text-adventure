@@ -1,10 +1,10 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:24:37 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m24 |[0m      [33mval[0m [36mexpectedText[0m = floor.props.get([31m"look"[0m).get[0m
-[0m[[0m[31merror[0m] [0m[0m   |                         [31m^^^^^^^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |                  value get is not a member of text_adventure.SenseProps[0m
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:29:37 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m29 |[0m      [33mval[0m [36mexpectedText[0m = floor.props.get([31m"smell"[0m).get[0m
-[0m[[0m[31merror[0m] [0m[0m   |                         [31m^^^^^^^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |                  value get is not a member of text_adventure.SenseProps[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:29:40 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m29 |[0m      [33mval[0m [36mexpectedText[0m = testItem.sense.look[0m
+[0m[[0m[31merror[0m] [0m[0m   |                         [31m^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |value look is not a member of text_adventure.ValidCommand => String - did you mean text_adventure.ValidCommand => String.clone?[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:35:40 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m35 |[0m      [33mval[0m [36mexpectedText[0m = testItem.sense.smell[0m
+[0m[[0m[31merror[0m] [0m[0m   |                         [31m^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |    value smell is not a member of text_adventure.ValidCommand => String[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

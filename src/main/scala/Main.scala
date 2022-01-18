@@ -16,6 +16,7 @@ import scala.io.StdIn
 
 class State[TempData, StateObjects](val tempData:TempData, val stateObjects:StateObjects)
 
+
 def roomState_loop = text_adventure_state_loop(doActionInRoom)
 
 def validateInput = (input:String) => 
@@ -34,39 +35,81 @@ def text_adventure_state_loop[StateObjects] =
     println("-----")
     newState
 
-enum ValidCommand(val name:String, val errorMessage:Option[String] ){ 
-  case Look extends ValidCommand("look",Some("What will you look at?"))
-  case Smell extends ValidCommand("smell", Some("What will you smell?"))
-  case Go extends ValidCommand("go", Some("Where will you go?"))
-  case Inventory extends ValidCommand("inventory", None)
-  case Exit extends ValidCommand("exit",None)
+enum Arity:
+  case Nullary
+  case Unary
+
+// type CommandType = SenseCommand | MovementCommand | MiscCommand
+
+// enum SenseCommand:
+//   case Look
+//   case Smell
+//   case Hear
+//   case Touch
+//   case Taste
+
+// enum MovementCommand:
+//   case Go
+//   case Exit
+
+// enum MiscCommand:
+//   case Inventory
+
+// def honk = (cmd:CommandType) => cmd match
+//   case SenseCommand.Hear => ""
+
+// def parseCommandSubtype =(cmd:CommandType) => cmd match
+//   case MovementCommand.Exit | MovementCommand.Exit => cmd
+
+
+enum ValidCommand(override val name:String) extends Named(name){ 
+  case Look extends ValidCommand("look")
+  case Smell extends ValidCommand("smell")
+  case Hear extends ValidCommand("hear")
+  case Touch extends ValidCommand("touch")
+  case Taste extends ValidCommand("taste")
+  case Go extends ValidCommand("go")
+  case Inventory extends ValidCommand("inventory")
+  case Exit extends ValidCommand("exit")
+  val notImplemented = name + " is not implemented yet."
 }
 
-def doActionInRoom = (command_tuple:(ValidCommand, List[String]), state:State[String,(Room,RoomDirectory)]) => {
+def doActionInRoom = (command_tuple:(ValidCommand, List[String]), state:State[String,(Room,RoomDirectory)]) => 
   val room = state.stateObjects._1
   val directory = state.stateObjects._2
   val command = command_tuple._1
   val list = command_tuple._2
 
-  command match 
-    case ValidCommand.Exit => State("Exit is not implemented yet.", state.stateObjects)
-    case ValidCommand.Inventory => State("Inventory is not implemented yet.", state.stateObjects)
-    case ValidCommand.Go => if list.length == 0 
-      then State(ValidCommand.Go.errorMessage.get,state.stateObjects)
-      else directory.navigate(room, list(0))    
-    case ValidCommand.Look =>   if list.length == 0 
-          then State(ValidCommand.Look.errorMessage.get,state.stateObjects)
-          else if list(0) == "room" || list(0) == room.name
+  val arity = list.length match 
+      case 0 => Some(Arity.Nullary)
+      case 1 => Some(Arity.Unary)
+      case _ => None
+
+  arity match
+    case Some(arity) => arity match
+      case Arity.Nullary => command match 
+        case ValidCommand.Exit => State(command.notImplemented, state.stateObjects)
+        case ValidCommand.Inventory => State(command.notImplemented, state.stateObjects)
+        case ValidCommand.Go => State("Where would you like to go?", state.stateObjects)
+        case ValidCommand.Look => State("What would you like to look at?", state.stateObjects)
+        case ValidCommand.Smell => State("What will you smell?", state.stateObjects)
+        case ValidCommand.Taste => State("What will you taste?", state.stateObjects)
+        case ValidCommand.Touch => State("What will you touch?", state.stateObjects)
+        case ValidCommand.Hear => State("What will you hear?", state.stateObjects)
+      case Arity.Unary =>  command match 
+        case ValidCommand.Exit => State(command.notImplemented, state.stateObjects)
+        case ValidCommand.Inventory => State(command.notImplemented, state.stateObjects)
+        case ValidCommand.Go => directory.navigate(room, list(0))    
+        case ValidCommand.Look => if list(0) == "room" || list(0) == room.name
           then State(room.description + "\n" + "What will you do? \n", state.stateObjects) 
           else State(room.actOnItem(command_tuple),state.stateObjects)
-          // else State("I'm a big stupid gorilla.",state.stateObjects)
-    case ValidCommand.Smell => if list.length == 0 
-      then State(ValidCommand.Smell.errorMessage.get,state.stateObjects)
-      else State(room.actOnItem(command_tuple),state.stateObjects)
-  
-
-}
-
+        case ValidCommand.Smell => room.getItem(list(0)) match
+          case Left(string) => State(string,state.stateObjects)
+          case Right(item) => State(item.sense(command),state.stateObjects)
+        case ValidCommand.Taste =>  State(room.actOnItem(command_tuple),state.stateObjects)
+        case ValidCommand.Touch =>  State(room.actOnItem(command_tuple),state.stateObjects)
+        case ValidCommand.Hear =>  State(room.actOnItem(command_tuple),state.stateObjects)
+    case None => State("Too many commands! Type less things.\n", state.stateObjects)
 
 def actOnItemInList_generic = (itemNotFound:String) => (items:List[Item]) => 
   (command_tuple:(ValidCommand, List[String])) => 
@@ -74,11 +117,18 @@ def actOnItemInList_generic = (itemNotFound:String) => (items:List[Item]) =>
     val possibleItemName = command_tuple(1)(0)
     items.find(_.name == possibleItemName) match 
             case Some(item) => command match 
-                case ValidCommand.Look => item.sense.look
-                case ValidCommand.Smell => item.sense.smell
+                case ValidCommand.Look => item.sense(command)
+                case ValidCommand.Smell => item.sense(command)
                 case _ => "Why are you trying to sense an item with a non-sense command?"
             case None => itemNotFound
     
+case class SensibleObjects(val objects:List[Sensible & Named]){
+ def sense = (command:ValidCommand,name:String) => command match
+   case ValidCommand.Look => objects.find(_.name == name)
+   case ValidCommand.Smell => ""
+   case _ => "That's not a sense!"
+}
+
 
 class SenseProps(val look:String = "You cannot see it with your eyes.", 
     val smell:String = "It doesn't have a smell.", 
@@ -86,13 +136,27 @@ class SenseProps(val look:String = "You cannot see it with your eyes.",
     val touch:String = "It cannot be touched.",
     val hear:String = "It doesn't make a sound.")
 
-class Item(val name:String,val sense: SenseProps)
+case class Item(override val name:String,override val senseProps: SenseProps) extends Named(name), Sensible(senseProps)
 
-class Room(
+trait Named(val name:String)
+trait Sensible(val senseProps:SenseProps){
+  def sense = (cmd:ValidCommand) => cmd match
+    case ValidCommand.Look => senseProps.look
+    case ValidCommand.Smell => senseProps.smell
+    case ValidCommand.Hear => senseProps.hear
+    case ValidCommand.Touch => senseProps.touch
+    case ValidCommand.Taste => senseProps.taste
+    case _ => "That's not a sense!"
+}
+
+case class Room(
   val name:String, 
   val description:String,
   val items:List[Item]) {
     def actOnItem = actOnItemInList_generic("That object is not in this room.")(items)
+    def getItem = (name:String) => items.find(_.name == name) match 
+      case Some(item) => Right(item)
+      case None => Left("That item is not in this room.")
 }
 
 val barrel_props = SenseProps(
@@ -110,7 +174,7 @@ val sideRoom = Room("SideRoom",
 val desk_props = SenseProps("The desk is wooden.","The desk smells like fresh pine needles.")
 val desk = Item("desk",desk_props)
 
-val floor_props = SenseProps("look", "The floor is stone.","smell","The floor smells of dust.")
+val floor_props = SenseProps("The floor is stone.","The floor smells of dust.")
 val floor = Item("floor",floor_props)
 
 val roomObjects = List(desk, floor)
@@ -120,7 +184,7 @@ val mainRoom:Room = Room("MainRoom","You are in a room. There is a desk.\nThere 
 /**
 * Input a tuple -> (Room, List[AdjascentRooms])
 */
-class RoomDirectory(val roomList:List[(Room,List[Room])]){
+case class RoomDirectory(val roomList:List[(Room,List[Room])]){
 
   def navigate = (from:Room,to:String) => 
 
@@ -132,7 +196,7 @@ class RoomDirectory(val roomList:List[(Room,List[Room])]){
         case None => State("How did you get here?",(from,this))
 }
 
-val lint = Item("lint",SenseProps("Looks fuzzy.","smell","Smells extremely dusty."))
+val lint = Item("lint",SenseProps("Looks fuzzy.","Smells extremely dusty."))
 
 class Inventory(val itemList:List[Item]) {
   def actOnItem = actOnItemInList_generic("You do not have that item in your inventory.")(itemList)
@@ -144,3 +208,6 @@ val mainDirectory = RoomDirectory(List(
     (mainRoom,List(sideRoom)),
     (sideRoom,List(mainRoom))))
 
+val testItem = Item("test",SenseProps("It looks like a test!","It smells like a test!"))
+
+val testRoom = Room("testRoom", "This looks like the testing room.", List(testItem))
