@@ -5,7 +5,8 @@ package text_adventure
 import scala.compiletime.ops.string
 import scala.io.StdIn
 
-@main def hello: Unit = 
+
+def hello: Unit = 
 
   var state = State("",(mainRoom, mainDirectory))
   var input = "look room"
