@@ -15,16 +15,15 @@ import scala.io.StdIn
   while (true) {
     tuple = roomState_loop(input, dState)
     dState = tuple._2;
-    printTextAdventureStuff(tuple._1.state)
+    renderTextAdventurePrint(tuple._1.state)
     input = StdIn.readLine()
   } 
 
 case class TextAdventureState(val currentRoom:Room,val roomDirectory:RoomDirectory)
 
-
 def renderState[A] = (render:A=>Unit) => (rData:A) => render(rData)
 
-val printTextAdventureStuff = renderState((str:String) => println(str + "\n" + "-----"))
+val renderTextAdventurePrint = renderState((str:String) => println(str + "\n" + "-----"))
 
 case class RenderState[A](val state:A)
 
@@ -76,12 +75,15 @@ def senseItemCommand = (cmd:ValidCommand,itemName:Option[String], sensibleItems:
     case None => s"What would you like to ${cmd.name}?"
 }
 
-def goCommand = (dState:DataState[(Room,RoomDirectory)], destination:String) =>
+def goCommand = (dState:DataState[(Room,RoomDirectory)], destination:Option[String]) =>
   val currentRoom = dState.value._1
   val directory = dState.value._2
-  directory.roomMap(currentRoom).find(_.name == destination) match
+  destination match
+    case Some(destName) =>  directory.roomMap(currentRoom).find(_.name == destName) match
           case Some(room) => (RenderState(s"You go to the ${room.name}\n" + room.sense(ValidCommand.Look) ),dState.map(state => (room, state._2)))
           case None => (RenderState("You cannot get there from this room." ),dState)
+    case None => (RenderState("Where would you like to go?" ),dState)
+
 
 
 def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataState[(Room,RoomDirectory)]) => 
@@ -102,12 +104,14 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataSta
           case Right(item) => (RenderState(item.sense(command)),dState)
           case Left(string) => (RenderState(string),dState)
 
+  lazy val maybeName = if list.isEmpty then None else Some(list(0))
+
   arity match
     case Some(arity) => arity match
       case Arity.Nullary => command match 
         case ValidCommand.Exit => (RenderState(command.notImplemented), dState)
         case ValidCommand.Inventory => (RenderState(command.notImplemented), dState)
-        case ValidCommand.Go => (RenderState("Where will you go?"), dState)
+        case ValidCommand.Go => goCommand(dState, maybeName)
         case ValidCommand.Look => (RenderState("What will you look at?"), dState)
         case ValidCommand.Smell => (RenderState("What will you smell?"), dState)
         case ValidCommand.Taste => (RenderState("What will you taste?"), dState)
@@ -116,7 +120,7 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataSta
       case Arity.Unary =>  command match 
         case ValidCommand.Exit => (RenderState(command.notImplemented), dState)
         case ValidCommand.Inventory => (RenderState(command.notImplemented), dState)
-        case ValidCommand.Go =>  goCommand(dState, list(0));    
+        case ValidCommand.Go =>  goCommand(dState, maybeName);    
         case ValidCommand.Look => if list(0) == "room" || list(0) == room.name
           then (RenderState(room.sense(command) + "\n" + "What will you do? \n"), dState) 
           else senseItem
@@ -165,12 +169,18 @@ trait Sensible(val senseProps:SenseProps){
     case _ => "That's not a sense!"
 }
 
+
 trait HasItems(val items:List[Item], val itemNotFoundMsg:String){ 
   def getItem = (name:String) => items.find(_.name == name) match 
       case Some(item) => Right(item)
       case None => Left(itemNotFoundMsg)
     }
-      
+//This isn't going to work as a trait, since I can only add it once to a class
+trait HasNamed[T](val ts:List[T & Named], val notFoundMsg:String){ 
+  def getT = (name:String) => ts.find(_.name == name) match 
+      case Some(t) => Right(t)
+      case None => Left(notFoundMsg)
+    }
 case class Room(
   val name:String, 
   override val senseProps:SenseProps,
