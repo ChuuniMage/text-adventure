@@ -38,30 +38,7 @@ def text_adventure_state_loop[StateObjects] =
 enum Arity:
   case Nullary
   case Unary
-
-// type CommandType = SenseCommand | MovementCommand | MiscCommand
-
-// enum SenseCommand:
-//   case Look
-//   case Smell
-//   case Hear
-//   case Touch
-//   case Taste
-
-// enum MovementCommand:
-//   case Go
-//   case Exit
-
-// enum MiscCommand:
-//   case Inventory
-
-// def honk = (cmd:CommandType) => cmd match
-//   case SenseCommand.Hear => ""
-
-// def parseCommandSubtype =(cmd:CommandType) => cmd match
-//   case MovementCommand.Exit | MovementCommand.Exit => cmd
-
-
+  
 enum ValidCommand(override val name:String) extends Named(name){ 
   case Look extends ValidCommand("look")
   case Smell extends ValidCommand("smell")

@@ -1,16 +1,8 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:48:43 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m48 |[0m      [33mval[0m [36mexpectedText[0m = [31ms"You go to the [0m${room.name}[31m\n"[0m + room.description[0m
-[0m[[0m[31merror[0m] [0m[0m   |                                           [31m^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |                                           Not found: room[0m
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:48:59 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m48 |[0m      [33mval[0m [36mexpectedText[0m = [31ms"You go to the [0m${room.name}[31m\n"[0m + room.description[0m
-[0m[[0m[31merror[0m] [0m[0m   |                                                           [31m^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |                                                         Not found: room[0m
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E120] Naming Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:19:4 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m19 |[0m[33mval[0m [36mtestDirectory[0m = RoomDirectory(List((testRoom,List())))[0m
-[0m[[0m[31merror[0m] [0m[0m   |    [31m^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |Double definition:[0m
-[0m[[0m[31merror[0m] [0m[0m   |val testDirectory: text_adventure.RoomDirectory in [33mpackage object[0m [35mTest1$package[0m at line 15 and[0m
-[0m[[0m[31merror[0m] [0m[0m   |val testDirectory: text_adventure.RoomDirectory in [33mpackage object[0m [35mTest1$package[0m at line 19[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\test2.scala:30:8 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m30 |[0m        [35m@Test[0m [33mdef[0m [36mt1[0m = commandTest((ValidCommand.Look, List([31m"room"[0m)), testRoom.senseProps.look)[0m
+[0m[[0m[31merror[0m] [0m[0m   |        [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |The start of this line does not match any of the previous indentation widths.[0m
+[0m[[0m[31merror[0m] [0m[0m   |Indentation width of current line : 8 spaces[0m
+[0m[[0m[31merror[0m] [0m[0m   |This falls between previous widths: 4 spaces and 12 spaces[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

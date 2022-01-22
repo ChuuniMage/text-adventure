@@ -2,38 +2,34 @@ import org.junit.Assert.*
 import org.junit.Test
 import text_adventure2._
 
+class ValidateTests:
+    def validationTest = (input:String, expect:Either[RenderState[String], (ValidCommand, List[String])]) => 
+        assertEquals(validateInput(input), expect)
+        println(s"$input validate test passed.")
+    
+    assertEquals("", "")
+    @Test def t1 = validationTest("look room", Right((ValidCommand.Look, List("room"))))
+    @Test def t2 = validationTest("sthjsdf", Left(RenderState("sthjsdf is not a valid command.")))
+    
 
-
-
-class Look_Tests_2:
+class CommandTests:
     val honk = mainRoom
 
     println("TESTING SECOND BATCH")
     val testLookString = "It looks like a test!"
     val testSmellString = "It smells like a test!"
     val testItem = Item("test",SenseProps("It looks like a test!","It smells like a test!"))
-
-    val testRoom = Room("testRoom", SenseProps("This looks like the testing room, using SenseProps."), List(testItem))
+    val testRoom = Room("testRoom", SenseProps("This looks like the testing room, using SenseProps. TxtAdvState"), List(testItem))
     val testDirectory = RoomDirectory(Map((testRoom,List())))
-    var dState = DataState((testRoom, testDirectory))
-        @Test def t1(): Unit = 
-            val input = "look room"
-            val newState = roomState_loop(input,dState)
-            val expectedText = testRoom.sense(ValidCommand.Look) + "\n" + "What will you do? \n"
-            assertEquals(newState._1.state, expectedText)
-            println(newState._1.state)
-        @Test def t2(): Unit = 
-            val input = "look test"
-            val newState = roomState_loop(input,dState)
-            val expectedText = testItem.sense(ValidCommand.Look)
-            assertEquals(newState._1.state, expectedText)
-            assertEquals(newState._1.state, testLookString)
-            println(newState._1.state)
-        @Test def t3(): Unit = 
-            val input = "smell test"
-            val newState = roomState_loop(input,dState)
-            val expectedText = testItem.sense(ValidCommand.Smell)
-            assertEquals(newState._1.state, expectedText)
-            assertEquals(newState._1.state, testSmellString)
-            println(newState._1.state)
+    var dState = DataState(TxtAdvState(testRoom, testDirectory,None))
+
+    def commandTest = (tuple:(ValidCommand,List[String]), expectedText:String) => 
+        val newState = doActionInRoom(tuple,dState)
+        println(newState._1.state)
+        println(s"${tuple._1.name} command test passed.")
+
+    @Test def t1 = commandTest((ValidCommand.Look, List("room")), testRoom.senseProps.look)
+    @Test def t2 = commandTest((ValidCommand.Look, List("test")), testItem.senseProps.look)
+    @Test def t3 = commandTest((ValidCommand.Smell, List("test")), testItem.senseProps.smell)
+
 

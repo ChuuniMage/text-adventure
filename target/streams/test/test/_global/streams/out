@@ -1,7 +1,11 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Look_Tests_2, com.novocode.junit.JUnitFingerprint@3988d2fa, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Test1, com.novocode.junit.JUnitFingerprint@3988d2fa, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(CommandTests, com.novocode.junit.JUnitFingerprint@5454af94, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Test1, com.novocode.junit.JUnitFingerprint@5454af94, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Look_Tests, com.novocode.junit.JUnitFingerprint@5454af94, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(ValidateTests, com.novocode.junit.JUnitFingerprint@5454af94, false, [SuiteSelector])[0m
 [0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
-[0m[[0m[0minfo[0m] [0m[0mPassed: Total 4, Failed 0, Errors 0, Passed 4[0m
+[0m[[0m[0minfo[0m] [0m[0mPassed: Total 10, Failed 0, Errors 0, Passed 10[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Look_Tests[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CommandTests[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Test1[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Look_Tests_2[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ValidateTests[0m
