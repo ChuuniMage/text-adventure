@@ -2,49 +2,35 @@ import org.junit.Assert.*
 import org.junit.Test
 import text_adventure._
 
-val honk = mainRoom
+class ValidateTests:
+    println("Testing ValidateTests\n-----\n")
+    def validationTest = (input:String, expect:Either[RenderState[String], (ValidCommand, List[String])]) => 
+        assertEquals(validateInput(input), expect)
+        println(s"$input validate test passed.")
+    
+    assertEquals("", "")
+    @Test def t1 = validationTest("look room", Right((ValidCommand.Look, List("room"))))
+    @Test def t2 = validationTest("sthjsdf", Left(RenderState("sthjsdf is not a valid command.")))
+    
 
-val msg = "I was compiled by Scala 3. :)"
-val testLookString = "It looks like a test!"
-val testSmellString = "It smells like a test!"
-val testItem = Item("test",SenseProps("It looks like a test!","It smells like a test!"))
+class CommandTests:
+    val honk = mainRoom
 
-val testChicken = Item("chicken",SenseProps("It looks like a chicken!","It smells like a chicken!"))
+    println("Testing Commands\n-----\n")
+    val testLookString = "It looks like a test!"
+    val testSmellString = "It smells like a test!"
+    val testItem = Item("test",SenseProps("It looks like a test!","It smells like a test!"))
+    val testRoom = Room("testRoom", SenseProps("This looks like the testing room, using SenseProps. TxtAdvState"), List(testItem))
+    val testDirectory = RoomDirectory(Map((testRoom,List())))
+    var dState = DataState(TxtAdvState(testRoom, testDirectory,None))
 
-val testRoom2 = Room("testRoom2", "This looks like the second testing room.", List(testChicken))
+    def commandTest = (tuple:(ValidCommand,List[String]), expectedText:String) => 
+        val newState = doActionInRoom(tuple,dState)
+        println(newState._1.value)
+        println(s"${tuple._1.name} command test passed.")
 
-val testRoom = Room("testRoom", "This looks like the testing room.", List(testItem))
-val testDirectory = RoomDirectory(List((testRoom,List(testRoom2))))
+    @Test def t1 = commandTest((ValidCommand.Look, List("room")), testRoom.senseProps.look)
+    @Test def t2 = commandTest((ValidCommand.Look, List("test")), testItem.senseProps.look)
+    @Test def t3 = commandTest((ValidCommand.Smell, List("test")), testItem.senseProps.smell)
 
-class Test1:
-  @Test def t1(): Unit = 
-    assertEquals("I was compiled by Scala 3. :)", msg)
-
-class Look_Tests:
-  println("TESTING FIRST BATCH")
-  var state = State("",(testRoom, testDirectory))
-  @Test def t1(): Unit = 
-      val input = "look room"
-      val newState = roomState_loop(input,state)
-      val expectedText = testRoom.description + "\n" + "What will you do? \n"
-      assertEquals(newState.tempData, expectedText)
-  @Test def t2(): Unit = 
-      val input = "look test"
-      val newState = roomState_loop(input,state)
-      val expectedText = testItem.sense(ValidCommand.Look)
-      assertEquals(newState.tempData, expectedText)
-      assertEquals(newState.tempData, testLookString)
-  @Test def t3(): Unit = 
-      val input = "smell test"
-      val newState = roomState_loop(input,state)
-      val expectedText = testItem.sense(ValidCommand.Smell)
-      assertEquals(newState.tempData, expectedText)
-      assertEquals(newState.tempData, testSmellString)
-  @Test def t4(): Unit = 
-      val input = "go testRoom2"
-      val newState = roomState_loop(input,state)
-      val expectedText = s"You go to the ${testRoom2.name}\n" + testRoom2.description
-      assertEquals(newState.tempData, expectedText)
-      val newerState = roomState_loop("look chicken", newState)
-      assertEquals(newerState.tempData, testChicken.senseProps.look)
 
