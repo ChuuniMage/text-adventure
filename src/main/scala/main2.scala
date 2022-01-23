@@ -23,14 +23,13 @@ import scala.io.StdIn
       case Right(input) => doGameAction(input, dState)
       case Left(rState) => (rState, dState)
     dState = tuple._2;
-    renderTextAdventurePrint(tuple._1.state)
+    rState = tuple._1
+    renderTextAdventurePrint(rState.value)
     dState.value.metaCommand match
-      case None => input = StdIn.readLine()
       case Some(cmd) => cmd match
         case MetaCommand.Quit => running = false
+      case None => input = StdIn.readLine()
 
-
-    
 enum MetaCommand:
   case Quit
 
@@ -38,7 +37,7 @@ case class TxtAdvState(val room:Room,val directory:RoomDirectory, val metaComman
 
 def renderState[A] = (render:A=>Unit) => (rData:A) => render(rData)
 
-case class RenderState[A](val state:A)
+case class RenderState[A](val value:A)
 
 case class DataState[A](val value:A):
   def map[B] (f: A => B) = DataState(f(value))
