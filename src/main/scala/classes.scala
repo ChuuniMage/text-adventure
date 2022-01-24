@@ -32,6 +32,7 @@ enum ValidCommand(override val name:String) extends Named(name):
   case Inventory extends ValidCommand("inventory")
   case Quit extends ValidCommand("quit")
   case Drop extends ValidCommand("drop")
+  case Take extends ValidCommand("take")
   val notImplemented = name + " is not implemented yet."
 
 class SenseProps(val look:String = "You cannot see it with your eyes.", 
@@ -45,28 +46,6 @@ case class WorldItem(override val name:String,override val senseProps: SenseProp
 case class InventoryItem(override val name:String,override val senseProps: SenseProps) extends Named(name), Sensible(senseProps)
 
 type Item = WorldItem | InventoryItem
-
-val honk = WorldItem("honk",SenseProps())
-val honk2 = InventoryItem("honk2",SenseProps())
-
-val listOfItem:List[Item] = List(honk,honk2)
-
-val honkExtracted = listOfItem.filter(item => item.isInstanceOf[InventoryItem])
-
-val honkEx = listOfItem.collect{case a:InventoryItem => a}
-
-val honkEx2 = listOfItem.collect((a) => {
-        a match 
-            case a:InventoryItem => a
-        })
-
-val newList = List("String",5)
-
-def pickupItem = (itemName:String, item:List[InventoryItem]) => {
-    item.find(_.name == itemName) match
-        case Some(item) => Right(item)
-        case None => Left(s"You cannot pick up the ${itemName}.")
-}
 
 trait Named(val name:String)
 
@@ -88,14 +67,14 @@ trait HasItems[A <: Item](val items:List[A], val itemNotFoundMsg:String):
       case None => Left(itemNotFoundMsg)
   val removeItem = (removedItem:A) => items.filter(item => item != removedItem)
 
-val newInventory = Inventory(List())
-val honk23 = newInventory.removeItem
-
 
 case class Room(
   override val name:String, 
   override val senseProps:SenseProps,
   override val items:List[Item]) 
     extends HasItems(items, "That item is not in this room."), Sensible(senseProps), Named(name) 
+    {
+      val inventoryItems = items.collect{case a:InventoryItem => a}
+    }
 
 case class RoomDirectory(val roomMap:Map[Room,List[Room]])

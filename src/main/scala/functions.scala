@@ -1,5 +1,6 @@
 package txt_adv_functions
 import txt_adv_classes.*
+import javax.xml.crypto.Data
 
 def validateInput = (input:String) => 
   val tokens = List.from(input.split(" ")) 
@@ -58,8 +59,37 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataSta
         => (senseItemCommand(senseCmdPayload),dState)
       case ValidCommand.Drop
         => dropCommand(dState,maybeName, inventory)
+      case ValidCommand.Take
+        => takeCommand(dState,maybeName,inventory)
          
     case false => (RenderState("Too many commands! Type less things.\n"), dState)
+
+val takeCommand = (dState:DataState[TxtAdvState],maybeName:Option[String],inventory:Inventory) => {
+     val room = dState.value.room
+     maybeName match
+        case Some(name) => room.getItem(name) match
+          case Left(msg) => (RenderState(msg),dState)
+            case Right(item) => 
+              val maybeItem = room.inventoryItems.find(roomInvItem => roomInvItem.name == item.name)
+              maybeItem match
+                case Some(invItem) =>  
+                  val newRState = RenderState(s"You take the ${invItem.name} from the ${room.name}.")
+                  val newDState:DataState[TxtAdvState] = dState.map(state =>
+                  {
+                  val newPlayer = PlayerData(Inventory(invItem :: inventory.items))
+                  val newRoom = Room(
+                    room.name,
+                    room.senseProps,
+                    room.removeItem(item))
+                  TxtAdvState(
+                    newPlayer,
+                    newRoom,
+                    dState.value.directory,
+                    dState.value.metaCommand)})
+                  (newRState, newDState)
+                case None => (RenderState(s"You cannot pick up the ${item.name}."), dState)
+        case None => (RenderState("What would you like to drop?"), dState)
+}
 
 def dropCommand = (dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => 
    val room = dState.value.room
@@ -67,7 +97,7 @@ def dropCommand = (dState:DataState[TxtAdvState], maybeName:Option[String], inve
           case Some(name) => inventory.getItem(name) match
             case Left(msg) => (RenderState(msg),dState)
             case Right(item) =>  
-              val newRState = RenderState(s"You drop the ${item.name} in the ${room.name}")
+              val newRState = RenderState(s"You drop the ${item.name} in the ${room.name}.")
               val newDState = dState.map(state =>
               {
               val newPlayer = PlayerData(Inventory(inventory.removeItem(item)))

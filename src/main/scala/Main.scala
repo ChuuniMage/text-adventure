@@ -48,9 +48,11 @@ val desk = WorldItem("desk",desk_props)
 val floor_props = SenseProps("The floor is stone.","The floor smells of dust.")
 val floor = WorldItem("floor",floor_props)
 
-val roomObjects = List(desk, floor)
+val yeFlask = InventoryItem("yeFlask", SenseProps())
 
-val mainRoomSenseProps = SenseProps("You are in a room. There is a desk.\nThere is a door to the SideRoom.")
+val roomObjects:List[Item] = List(desk, floor, yeFlask)
+
+val mainRoomSenseProps = SenseProps("You are in a room.\nThere is a desk.\nThere is a door to the SideRoom.")
 val mainRoom:Room = Room("MainRoom",mainRoomSenseProps, roomObjects)
 
 val lint = InventoryItem("lint",SenseProps("Looks fuzzy.","Smells extremely dusty."))
