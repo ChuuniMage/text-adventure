@@ -1,9 +1,16 @@
 package txt_adv_classes
 
+import txt_adv_meta._
+
 enum MetaCommand:
   case Quit
 
 case class TxtAdvState(val player:PlayerData, val room:Room,val directory:RoomDirectory, val metaCommand:Option[MetaCommand])
+
+given updateTxtAdvState:Update[TxtAdvState] with
+    def update = (state:TxtAdvState) => (nPlayer:Option[PlayerData], nRoom:Option[Room], nDirect:Option[RoomDirectory],nMeta:Option[Option[MetaCommand]]) => 
+    TxtAdvState(nPlayer ?? state.player, nRoom ?? state.room, nDirect ?? state.directory, nMeta ?? state.metaCommand)
+
 
 case class Inventory(override val items:List[InventoryItem]) 
   extends HasItems(items, "That item is not in your inventory."), Named("inventory"),
@@ -16,6 +23,7 @@ case class Inventory(override val items:List[InventoryItem])
 
 
 case class PlayerData(val inventory:Inventory)
+
 
 case class RenderState[A](val value:A)
 
