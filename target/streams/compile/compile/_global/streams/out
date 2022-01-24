@@ -1,8 +1,157 @@
-[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:63:10 [0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m63 |[0m    [33melse[0m  command [33mmatch[0m [0m
-[0m[[0m[33mwarn[0m] [0m[0m   |          [33m^^^^^^^[0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m   |          [33mmatch[0m may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0m   |[0m
-[0m[[0m[33mwarn[0m] [0m[0m   |          It would fail on pattern case: Inventory[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:10:29 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m[33mdef[0m [36mrenderState[0m[[35mA[0m] = ([36mrender[0m:[35mRenderState[A][0m=>[35mUnit[0m) => ([36mrData[0m:[35mRenderState[A][0m) => render(rData)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                             [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                             Not found: type RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:10:61 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m[33mdef[0m [36mrenderState[0m[[35mA[0m] = ([36mrender[0m:[35mRenderState[A][0m=>[35mUnit[0m) => ([36mrData[0m:[35mRenderState[A][0m) => render(rData)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                             [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                             Not found: type RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:40:13 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m40 |[0m[33mval[0m [36mbarrel[0m = Item([31m"barrel"[0m, barrel_props)[0m
+[0m[[0m[31merror[0m] [0m[0m   |             [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |             Not found: Item[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E007] Type Mismatch Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:17:37 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m17 |[0m  [33mvar[0m [36mdState[0m = DataState(TxtAdvState(mainRoom,mainDirectory,None))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                     [31m^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |              Found:    (text_adventure.mainRoom : txt_adv_classes.Room)[0m
+[0m[[0m[31merror[0m] [0m[0m   |              Required: txt_adv_classes.PlayerData[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E007] Type Mismatch Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:17:46 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m17 |[0m  [33mvar[0m [36mdState[0m = DataState(TxtAdvState(mainRoom,mainDirectory,None))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                              [31m^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |Found:    (text_adventure.mainDirectory : txt_adv_classes.RoomDirectory)[0m
+[0m[[0m[31merror[0m] [0m[0m   |Required: txt_adv_classes.Room[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E007] Type Mismatch Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:17:60 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m17 |[0m  [33mvar[0m [36mdState[0m = DataState(TxtAdvState(mainRoom,mainDirectory,None))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                            [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                 Found:    None.type[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                 Required: txt_adv_classes.RoomDirectory[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:35:37 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m35 |[0m[33mdef[0m [36mdoActionInRoom[0m = ([36mcommand_tuple[0m:([35mValidCommand[0m, [35mList[String][0m), [36mdState[0m:[35mDataState[TxtAdvState][0m) => [0m
+[0m[[0m[31merror[0m] [0m[0m   |                                     [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                     Not found: type ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:35:73 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m35 |[0m[33mdef[0m [36mdoActionInRoom[0m = ([36mcommand_tuple[0m:([35mValidCommand[0m, [35mList[String][0m), [36mdState[0m:[35mDataState[TxtAdvState][0m) => [0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                         [31m^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                               Not found: type DataState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:40:30 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m40 |[0m  [33mlazy[0m [33mval[0m [36msensibleItems[0m:[35mList[Sensible & Named][0m = room :: room.items[0m
+[0m[[0m[31merror[0m] [0m[0m   |                              [31m^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                              Not found: type Sensible[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:40:41 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m40 |[0m  [33mlazy[0m [33mval[0m [36msensibleItems[0m:[35mList[Sensible & Named][0m = room :: room.items[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                         [31m^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                         Not found: type Named[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:48:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m48 |[0m      [33mcase[0m ValidCommand.Quit [0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:49:12 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m49 |[0m        => (RenderState([31m"Quitting game."[0m), dState.map(state => TxtAdvState(state.room, state.directory, Some(MetaCommand.Quit))))[0m
+[0m[[0m[31merror[0m] [0m[0m   |            [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |            Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:50:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m50 |[0m      [33mcase[0m ValidCommand.Inventory [0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:51:12 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m51 |[0m        => (RenderState(command.notImplemented), dState)[0m
+[0m[[0m[31merror[0m] [0m[0m   |            [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |            Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:52:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m52 |[0m      [33mcase[0m ValidCommand.Go [0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:24:24 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m24 |[0m[33mdef[0m [36mgoCommand[0m = ([36mdState[0m:[35mDataState[TxtAdvState][0m, [36mdestination[0m:[35mOption[String][0m) =>[0m
+[0m[[0m[31merror[0m] [0m[0m   |                        [31m^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                        Not found: type DataState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:30:30 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m30 |[0m          [33mcase[0m Some(dest) => (RenderState([31ms"You go to the [0m${dest.name}[31m\n"[0m + dest.sense(ValidCommand.Look) ),dState.map(state => TxtAdvState(dest,state.directory, state.metaCommand)))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                              [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                              Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:30:60 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m30 |[0m          [33mcase[0m Some(dest) => (RenderState([31ms"You go to the [0m${dest.name}[31m\n"[0m + dest.sense(ValidCommand.Look) ),dState.map(state => TxtAdvState(dest,state.directory, state.metaCommand)))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                            [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                         Not found: dest[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:30:76 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m30 |[0m          [33mcase[0m Some(dest) => (RenderState([31ms"You go to the [0m${dest.name}[31m\n"[0m + dest.sense(ValidCommand.Look) ),dState.map(state => TxtAdvState(dest,state.directory, state.metaCommand)))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                            [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                         Not found: dest[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:31:24 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m31 |[0m          [33mcase[0m None => (RenderState([31m"You cannot get there from this room."[0m ),dState)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                        [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                        Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:32:18 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m32 |[0m    [33mcase[0m None => (RenderState([31m"Where would you like to go?"[0m ),dState)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                  [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                  Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:54:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m54 |[0m      [33mcase[0m ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear[0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:54:31 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m54 |[0m      [33mcase[0m ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear[0m
+[0m[[0m[31merror[0m] [0m[0m   |                               [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                               Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:54:52 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m54 |[0m      [33mcase[0m ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                    [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                 Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:54:73 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m54 |[0m      [33mcase[0m ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                         [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                 Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:54:94 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m54 |[0m      [33mcase[0m ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                                              [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                 Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:12:30 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m12 |[0m[33mdef[0m [36msenseItemCommand[0m = ([36margs[0m:([35mValidCommand[0m, [35mOption[String][0m, [35mList[Sensible & Named][0m)) => [0m
+[0m[[0m[31merror[0m] [0m[0m   |                              [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                              Not found: type ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:12:65 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m12 |[0m[33mdef[0m [36msenseItemCommand[0m = ([36margs[0m:([35mValidCommand[0m, [35mOption[String][0m, [35mList[Sensible & Named][0m)) => [0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                 [31m^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                Not found: type Sensible[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:12:76 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m12 |[0m[33mdef[0m [36msenseItemCommand[0m = ([36margs[0m:([35mValidCommand[0m, [35mOption[String][0m, [35mList[Sensible & Named][0m)) => [0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                            [31m^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                   Not found: type Named[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:19:30 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m19 |[0m      [33mcase[0m Some(item) => item.sense(cmd)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                         [31m^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                         value sense is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:22:4 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m22 |[0m    RenderState(renderString)[0m
+[0m[[0m[31merror[0m] [0m[0m   |    [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |    Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:56:19 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m56 |[0m    [33mcase[0m [31mfalse[0m => (RenderState([31m"Too many commands! Type less things.\n"[0m), dState)[0m
+[0m[[0m[31merror[0m] [0m[0m   |                   [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                   Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:6:2 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m6 |[0m  ValidCommand.values.find(_.name == tokens.head) [33mmatch[0m [0m
+[0m[[0m[31merror[0m] [0m[0m  |  [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |  Not found: ValidCommand[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:7:33 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m7 |[0m    [33mcase[0m Some(command) => Right((command, tokens.tail))[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                 [31m^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                 Not found: command[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\functions.scala:8:22 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m8 |[0m    [33mcase[0m None => Left(RenderState([31ms"[0m${tokens.head}[31m is not a valid command."[0m))[0m
+[0m[[0m[31merror[0m] [0m[0m  |                      [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |                      Not found: RenderState[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:47:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m47 |[0m[33mval[0m [36mdesk[0m = Item([31m"desk"[0m,desk_props)[0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: Item[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:50:12 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m50 |[0m[33mval[0m [36mfloor[0m = Item([31m"floor"[0m,floor_props)[0m
+[0m[[0m[31merror[0m] [0m[0m   |            [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |            Not found: Item[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\main\scala\Main.scala:57:11 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m57 |[0m[33mval[0m [36mlint[0m = Item([31m"lint"[0m,SenseProps([31m"Looks fuzzy."[0m,[31m"Smells extremely dusty."[0m))[0m
+[0m[[0m[31merror[0m] [0m[0m   |           [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |           Not found: Item[0m
+[0m[[0m[31merror[0m] [0m[0m38 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m38 errors found[0m

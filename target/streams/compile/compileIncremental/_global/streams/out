@@ -1,36 +1,35 @@
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
-[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 99 products, 4 sources, 2 libraries[0m
-[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/honk.scala, ${BASE}/src/main/scala/Main.scala, ${BASE}/src/main/scala/settled.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(${BASE}/src/main/scala/main2.scala), changed = Set(${BASE}/src/main/scala/Main.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 68 products, 3 sources, 2 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/classes.scala, ${BASE}/src/main/scala/functions.scala, ${BASE}/src/main/scala/Main.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/classes.scala, ${BASE}/src/main/scala/functions.scala), removed = Set(${BASE}/src/main/scala/honk.scala, ${BASE}/src/main/scala/settled.scala), changed = Set(${BASE}/src/main/scala/Main.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	removed: Set(${BASE}/src/main/scala/main2.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed: Set(${BASE}/src/main/scala/honk.scala, ${BASE}/src/main/scala/settled.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set(${BASE}/src/main/scala/classes.scala, ${BASE}/src/main/scala/functions.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/Main.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(text_adventure.Room, text_adventure.ValidCommand, text_adventure.Main$package, text_adventure.State, text_adventure2.hello, text_adventure.SensibleObjects, text_adventure.Item, text_adventure.Inventory, text_adventure2.RenderState, text_adventure2.Inventory, text_adventure.Named, text_adventure2.HasItems, text_adventure2.MetaCommand, text_adventure2.Sensible, text_adventure2.RoomDirectory, text_adventure2.DataState, text_adventure.SenseProps, text_adventure2.Room, text_adventure.Sensible, text_adventure2.TxtAdvState, text_adventure2.main2$package, text_adventure.HasItems, text_adventure2.Named, text_adventure2.Item, text_adventure.RoomDirectory, text_adventure2.ValidCommand, text_adventure.Arity, text_adventure2.SenseProps)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(SenseProps, CommandArity, Sensible, text_adventure.Room, text_adventure.ValidCommand, text_adventure.Main$package, text_adventure.TxtAdvState, text_adventure.RenderState, text_adventure.Item, Command, text_adventure.Inventory, SenseCommand, text_adventure.MetaCommand, text_adventure.Named, settled.settled$package, Inventory, text_adventure.DataState, text_adventure.SenseProps, text_adventure.Sensible, ValidCommand, Item, MiscCommand, honk$package, text_adventure.HasItems, text_adventure.RoomDirectory, State, text_adventure.hello, Room, RoomDirectory)[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(text_adventure.Room, text_adventure.ValidCommand, text_adventure.Main$package, text_adventure.State, text_adventure2.hello, text_adventure.SensibleObjects, text_adventure.Item, text_adventure.Inventory, text_adventure2.RenderState, text_adventure2.Inventory, text_adventure.Named, text_adventure2.HasItems, text_adventure2.MetaCommand, text_adventure2.Sensible, text_adventure2.RoomDirectory, text_adventure2.DataState, text_adventure.SenseProps, text_adventure2.Room, text_adventure.Sensible, text_adventure2.TxtAdvState, text_adventure2.main2$package, text_adventure.HasItems, text_adventure2.Named, text_adventure2.Item, text_adventure.RoomDirectory, text_adventure2.ValidCommand, text_adventure.Arity, text_adventure2.SenseProps)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/Main.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: text_adventure.Room, text_adventure.ValidCommand, text_adventure.Main$package, text_adventure.State, text_adventure2.hello, text_adventure.SensibleObjects, text_adventure.Item, text_adventure.Inventory, text_adventure2.RenderState, text_adventure2.Inventory, text_adventure.Named, text_adventure2.HasItems, text_adventure2.MetaCommand, text_adventure2.Sensible, text_adventure2.RoomDirectory, text_adventure2.DataState, text_adventure.SenseProps, text_adventure2.Room, text_adventure.Sensible, text_adventure2.TxtAdvState, text_adventure2.main2$package, text_adventure.HasItems, text_adventure2.Named, text_adventure2.Item, text_adventure.RoomDirectory, text_adventure2.ValidCommand, text_adventure.Arity, text_adventure2.SenseProps[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding text_adventure2.Room by text_adventure2.HasItems[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding text_adventure2.Item by text_adventure2.Sensible[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding text_adventure2.ValidCommand by text_adventure2.Named[0m
+[0m[[0m[0mdebug[0m] [0m[0mall 3 sources are invalidated[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: SenseProps, CommandArity, Sensible, text_adventure.Room, text_adventure.ValidCommand, text_adventure.Main$package, text_adventure.TxtAdvState, text_adventure.RenderState, text_adventure.Item, Command, text_adventure.Inventory, SenseCommand, text_adventure.MetaCommand, text_adventure.Named, settled.settled$package, Inventory, text_adventure.DataState, text_adventure.SenseProps, text_adventure.Sensible, ValidCommand, Item, MiscCommand, honk$package, text_adventure.HasItems, text_adventure.RoomDirectory, State, text_adventure.hello, Room, RoomDirectory[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding Item by Sensible[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding SenseCommand by Command[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding MiscCommand by Command[0m
 [0m[[0m[0mdebug[0m] [0m[0mRecompiling all sources: number of invalidated sources > 50.0% of all sources[0m
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
 [0m[[0m[0minfo[0m] [0m[0mcompiling 3 Scala sources to C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\target\scala-3.1.0\classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.1.0\scala3-sbt-bridge-3.1.0.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 69d49fa2 for Scala Compiler version 3.1.0[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 7a1372e0 for Scala Compiler version 3.1.0[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.1.0\scala3-library_3-3.1.0.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.6\scala-library-2.13.6.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\target\scala-3.1.0\classes;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-prelude_3\1.0.0-RC5\zio-prelude_3-1.0.0-RC5.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio_3\1.0.8\zio_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-test_3\1.0.8\zio-test_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-stacktracer_3\1.0.8\zio-stacktracer_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\izumi-reflect_3\1.1.2\izumi-reflect_3-1.1.2.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\zio-streams_3\1.0.8\zio-streams_3-1.0.8.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\portable-scala\portable-scala-reflect_2.13\1.1.1\portable-scala-reflect_2.13-1.1.1.jar;C:\Users\krisd\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\dev\zio\izumi-reflect-thirdparty-boopickle-shaded_3\1.1.2\izumi-reflect-thirdparty-boopickle-shaded_3-1.1.2.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 6.9253317 s[0m
-[0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+[0m[[0m[0mdebug[0m] [0m[0mCompilation failed[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
