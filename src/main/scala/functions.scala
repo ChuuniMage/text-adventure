@@ -36,8 +36,11 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataSta
   val room = dState.value.room
   val command = command_tuple._1
   val list = command_tuple._2
+  val player = dState.value.player
+  val inventory = dState.value.player.inventory
   
-  lazy val sensibleItems:List[Sensible & Named] = room :: room.items
+  lazy val sensibleItems:List[Sensible & Named] = inventory :: room :: room.items concat inventory.items
+
   lazy val maybeName = if list.isEmpty then None 
     else if list(0) == "room" then Some(room.name) else Some(list(0))
 
@@ -48,9 +51,34 @@ def doActionInRoom = (command_tuple:(ValidCommand, List[String]), dState:DataSta
       case ValidCommand.Quit 
         => (RenderState("Quitting game."), dState.map(state => TxtAdvState(state.player,state.room, state.directory, Some(MetaCommand.Quit))))
       case ValidCommand.Inventory 
-        => (RenderState(command.notImplemented), dState)
+        => (RenderState(inventory.sense(ValidCommand.Look)), dState)
       case ValidCommand.Go 
         => goCommand(dState, maybeName)
       case ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear
         => (senseItemCommand(senseCmdPayload),dState)
+      case ValidCommand.Drop
+        => dropCommand(dState,maybeName, inventory)
+         
     case false => (RenderState("Too many commands! Type less things.\n"), dState)
+
+def dropCommand = (dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => 
+   val room = dState.value.room
+      maybeName match      
+          case Some(name) => inventory.getItem(name) match
+            case Left(msg) => (RenderState(msg),dState)
+            case Right(item) =>  
+              val newRState = RenderState(s"You drop the ${item.name} in the ${room.name}")
+              val newDState = dState.map(state =>
+              {
+              val newPlayer = PlayerData(Inventory(inventory.removeItem(item)))
+              val newRoom = Room(
+                room.name,
+                room.senseProps,
+                item :: room.items )
+              TxtAdvState(
+                newPlayer,
+                newRoom,
+                dState.value.directory,
+                dState.value.metaCommand)})
+              (newRState, newDState)
+          case None => (RenderState("What would you like to drop?"), dState)

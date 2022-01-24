@@ -1,6 +1,8 @@
 import org.junit.Assert.*
 import org.junit.Test
 import text_adventure._
+import txt_adv_classes._
+import txt_adv_functions._
 
 class ValidateTests:
     println("Testing ValidateTests\n-----\n")
@@ -19,10 +21,10 @@ class CommandTests:
     println("Testing Commands\n-----\n")
     val testLookString = "It looks like a test!"
     val testSmellString = "It smells like a test!"
-    val testItem = Item("test",SenseProps("It looks like a test!","It smells like a test!"))
+    val testItem = WorldItem("test",SenseProps("It looks like a test!","It smells like a test!"))
     val testRoom = Room("testRoom", SenseProps("This looks like the testing room, using SenseProps. TxtAdvState"), List(testItem))
     val testDirectory = RoomDirectory(Map((testRoom,List())))
-    var dState = DataState(TxtAdvState(testRoom, testDirectory,None))
+    var dState = DataState(TxtAdvState(PlayerData(Inventory(List())),testRoom, testDirectory,None))
 
     def commandTest = (tuple:(ValidCommand,List[String]), expectedText:String) => 
         val newState = doActionInRoom(tuple,dState)

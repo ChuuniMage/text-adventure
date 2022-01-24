@@ -6,7 +6,14 @@ enum MetaCommand:
 case class TxtAdvState(val player:PlayerData, val room:Room,val directory:RoomDirectory, val metaCommand:Option[MetaCommand])
 
 case class Inventory(override val items:List[InventoryItem]) 
-  extends HasItems(items, "That item is not in your inventory.") 
+  extends HasItems(items, "That item is not in your inventory."), Named("inventory"),
+  Sensible(SenseProps({
+      val folded = if items.length == 0 
+        then "- Nothing\n" 
+        else items.map(item => s"- ${item.name}\n").fold("")((tally,elem) => tally + elem)
+      "You are carrying:\n" + folded}
+        ))
+
 
 case class PlayerData(val inventory:Inventory)
 
@@ -24,6 +31,7 @@ enum ValidCommand(override val name:String) extends Named(name):
   case Go extends ValidCommand("go")
   case Inventory extends ValidCommand("inventory")
   case Quit extends ValidCommand("quit")
+  case Drop extends ValidCommand("drop")
   val notImplemented = name + " is not implemented yet."
 
 class SenseProps(val look:String = "You cannot see it with your eyes.", 
@@ -73,16 +81,21 @@ trait Sensible(val senseProps:SenseProps):
     case ValidCommand.Taste => senseProps.taste
     case _ => "That's not a sense!" // Me no likey.
 
-trait HasItems(val items:List[Item], val itemNotFoundMsg:String):
+//Cool type thing I learned: `Class[A <: B]` is "type A where it is a subtype of B"
+trait HasItems[A <: Item](val items:List[A], val itemNotFoundMsg:String):
   val getItem = (name:String) => items.find(_.name == name) match 
       case Some(item) => Right(item)
       case None => Left(itemNotFoundMsg)
+  val removeItem = (removedItem:A) => items.filter(item => item != removedItem)
+
+val newInventory = Inventory(List())
+val honk23 = newInventory.removeItem
+
 
 case class Room(
   override val name:String, 
   override val senseProps:SenseProps,
-  override val items:List[WorldItem]) 
+  override val items:List[Item]) 
     extends HasItems(items, "That item is not in this room."), Sensible(senseProps), Named(name) 
 
 case class RoomDirectory(val roomMap:Map[Room,List[Room]])
-
