@@ -4,11 +4,12 @@ import txt_adv_meta._
 
 enum MetaCommand:
   case Quit
+  case Null
 
-case class TxtAdvState(val player:PlayerData, val room:Room,val directory:RoomDirectory, val metaCommand:Option[MetaCommand])
+case class TxtAdvState(val player:PlayerData, val room:Room,val directory:RoomDirectory, val metaCommand:MetaCommand = MetaCommand.Null)
 
 given updateTxtAdvState:Update[TxtAdvState] with
-    def update = (state:TxtAdvState) => (nPlayer:Option[PlayerData], nRoom:Option[Room], nDirect:Option[RoomDirectory],nMeta:Option[Option[MetaCommand]]) => 
+    val update = (state:TxtAdvState) => (nPlayer:Option[PlayerData], nRoom:Option[Room], nDirect:Option[RoomDirectory],nMeta:Option[MetaCommand]) => 
     TxtAdvState(nPlayer ?? state.player, nRoom ?? state.room, nDirect ?? state.directory, nMeta ?? state.metaCommand)
 
 
@@ -23,7 +24,6 @@ case class Inventory(override val items:List[InventoryItem])
 
 
 case class PlayerData(val inventory:Inventory)
-
 
 case class RenderState[A](val value:A)
 
@@ -50,7 +50,6 @@ class SenseProps(val look:String = "You cannot see it with your eyes.",
     val hear:String = "It doesn't make a sound.")
 
 case class WorldItem(override val name:String,override val senseProps: SenseProps) extends Named(name), Sensible(senseProps)
-
 case class InventoryItem(override val name:String,override val senseProps: SenseProps) extends Named(name), Sensible(senseProps)
 
 type Item = WorldItem | InventoryItem
@@ -84,5 +83,9 @@ case class Room(
     {
       val inventoryItems = items.collect{case a:InventoryItem => a}
     }
+
+given updateRoom:Update[Room] with
+    val update = (room:Room) => (newName:Option[String], nSenseProps:Option[SenseProps], nItems:Option[List[Item]]) => 
+    Room(newName ?? room.name, nSenseProps ?? room.senseProps, nItems ?? room.items)
 
 case class RoomDirectory(val roomMap:Map[Room,List[Room]])

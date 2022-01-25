@@ -13,7 +13,7 @@ import scala.io.StdIn
   val renderTextAdventurePrint:RenderState[String] => Unit = renderState((state) => println(state.value + "\n" + "-----"))
 
   var rState = RenderState(mainRoom.sense(ValidCommand.Look))
-  var dState = DataState(TxtAdvState(player, mainRoom,mainDirectory,None))
+  var dState = DataState(TxtAdvState(player, mainRoom,mainDirectory,MetaCommand.Null))
   var tuple = (rState, dState)
   var input = "look room"
   var running = true
@@ -28,9 +28,9 @@ import scala.io.StdIn
     rState = tuple._1
     renderTextAdventurePrint(rState)
     dState.value.metaCommand match
-      case Some(cmd) => cmd match
         case MetaCommand.Quit => running = false
-      case None => input = StdIn.readLine()
+        case MetaCommand.Null => input = StdIn.readLine()
+
 
 val barrel_props = SenseProps(
   "The barrel looks round.",

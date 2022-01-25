@@ -24,7 +24,7 @@ class CommandTests:
     val testItem = WorldItem("test",SenseProps("It looks like a test!","It smells like a test!"))
     val testRoom = Room("testRoom", SenseProps("This looks like the testing room, using SenseProps. TxtAdvState"), List(testItem))
     val testDirectory = RoomDirectory(Map((testRoom,List())))
-    var dState = DataState(TxtAdvState(PlayerData(Inventory(List())),testRoom, testDirectory,None))
+    var dState = DataState(TxtAdvState(PlayerData(Inventory(List())),testRoom, testDirectory,MetaCommand.Null))
 
     def commandTest = (tuple:(ValidCommand,List[String]), expectedText:String) => 
         val newState = doActionInRoom(tuple,dState)
