@@ -1,8 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\test2.scala:30:8 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m30 |[0m        [35m@Test[0m [33mdef[0m [36mt1[0m = commandTest((ValidCommand.Look, List([31m"room"[0m)), testRoom.senseProps.look)[0m
-[0m[[0m[31merror[0m] [0m[0m   |        [31m^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |The start of this line does not match any of the previous indentation widths.[0m
-[0m[[0m[31merror[0m] [0m[0m   |Indentation width of current line : 8 spaces[0m
-[0m[[0m[31merror[0m] [0m[0m   |This falls between previous widths: 4 spaces and 12 spaces[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E007] Type Mismatch Error: C:\Users\krisd\Documents\Programming\Scala\text-adventure\text-adventure\src\test\scala\Test1.scala:27:93 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m27 |[0m    [33mvar[0m [36mdState[0m = DataState(TxtAdvState(PlayerData(Inventory(List())),testRoom, testDirectory,None))[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                                                                             [31m^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                   Found:    None.type[0m
+[0m[[0m[31merror[0m] [0m[0m   |                                   Required: txt_adv_classes.MetaCommand[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
