@@ -14,26 +14,28 @@ def validateInput = (input:String) =>
 
 def renderState[A] = (render:RenderState[A]=>Unit) => (rData:RenderState[A]) => render(rData)
 
-def senseItemCommand = (args:(ValidCommand, Option[String], List[Sensible & Named])) => 
-  val cmd = args._1
-  val itemName = args._2
-  val sensibleItems = args._3
+def senseItemCommand = (cmd:ValidCommand, maybeName:Option[String], sensibleItems:List[Sensible & Named]) => 
 
-  itemName match
+
+  maybeName match
+    case None => s"What would you like to ${cmd.name}?"
     case Some(name) => sensibleItems.find(_.name == name) match
       case Some(item) => item.sense(cmd)
       case None => "That item is not in this room."
-    case None => s"What would you like to ${cmd.name}?"
 
-def goCommand = (dState:DataState[TxtAdvState], destination:Option[String]) =>
+
+def goCommand: (dState:DataState[TxtAdvState], destination:Option[String]) => String|(String, DataState[TxtAdvState])
+= (dState:DataState[TxtAdvState], destination:Option[String]) =>
   val currentRoom = dState.value.room
   val directory = dState.value.directory
 
   destination match
+    case None => "Where would you like to go?"
     case Some(destName) =>  directory.roomMap(currentRoom).find(_.name == destName) match
-          case Some(dest) => (s"You go to the ${dest.name}\n" + dest.sense(ValidCommand.Look) ,dState.map(_.update(None,Some(dest),None,None)))
-          case None => ("You cannot get there from this room." ,dState)
-    case None => ("Where would you like to go?",dState)
+      case None => "You cannot get there from this room."
+      case Some(dest) => (s"You go to the ${dest.name}.\n" + dest.sense(ValidCommand.Look) ,dState.map(_.update(None,Some(dest),None,None)))
+
+
 
 
 def doActionInRoom (command_tuple:(ValidCommand, List[String]), dState:DataState[TxtAdvState]):(RenderState[String], DataState[TxtAdvState]) =
@@ -48,54 +50,56 @@ def doActionInRoom (command_tuple:(ValidCommand, List[String]), dState:DataState
   lazy val maybeName = if list.isEmpty then None 
     else if list(0) == "room" then Some(room.name) else Some(list(0))
 
-  lazy val senseCmdPayload = (command, maybeName, sensibleItems)
   val validLength = list.length <= 1
-  val tuple:(String, DataState[TxtAdvState]) = validLength match
+  val stringOrTuple:String|(String, DataState[TxtAdvState]) = validLength match
     case true => command match
       case ValidCommand.Quit 
         => ("Quitting game.", dState.map(_.update(None,None,None,Some(MetaCommand.Quit))))
       case ValidCommand.Inventory 
-        => (inventory.sense(ValidCommand.Look), dState)
+        => inventory.sense(ValidCommand.Look)
       case ValidCommand.Go 
         => goCommand(dState, maybeName)
       case ValidCommand.Look | ValidCommand.Smell | ValidCommand.Taste | ValidCommand.Touch | ValidCommand.Hear
-        => (senseItemCommand(senseCmdPayload),dState)
+        => senseItemCommand(command, maybeName, sensibleItems)
       case ValidCommand.Drop
         => dropCommand(dState,maybeName, inventory)
       case ValidCommand.Take
         => takeCommand(dState,maybeName,inventory)
-    case false => ("Too many commands! Type less things.\n", dState)
-  return (RenderState(tuple._1), tuple._2)
+    case false => "Too many commands! Type less things.\n"
+  
+  stringOrTuple match
+    case str:String =>(RenderState(str), dState)
+    case tuple:(String,DataState[TxtAdvState]) => (RenderState(tuple._1), tuple._2)
 
-val takeCommand = (dState:DataState[TxtAdvState],maybeName:Option[String],inventory:Inventory) => {
+def takeCommand: (dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => String|(String, DataState[TxtAdvState])
+ = (dState:DataState[TxtAdvState],maybeName:Option[String],inventory:Inventory) => 
      val room = dState.value.room
      maybeName match
+        case None => "What would you like to drop?"
         case Some(name) => room.getItem(name) match
-          case Left(msg) => (msg,dState)
-            case Right(item) => 
-              val maybeItem = room.inventoryItems.find(_.name == item.name)
-              maybeItem match
-                case Some(invItem) =>  
-                  val newDState:DataState[TxtAdvState] = dState.map(state =>
-                      val newPlayer = PlayerData(Inventory(invItem :: inventory.items))
-                      val newRoom = room.update(None,None,Some(room.removeItem(item)))
-                      state.update(Some(newPlayer),Some(newRoom),None,None))
+          case Left(msg) => msg
+          case Right(item) => 
+            val maybeItem = room.inventoryItems.find(_.name == item.name)
+            maybeItem match
+              case Some(invItem) =>  
+                val newPlayer = PlayerData(Inventory(invItem :: inventory.items))
+                val newRoom = room.update(None,None,Some(room.removeItem(item)))
+                val newDState:DataState[TxtAdvState] = dState.map(_.update(Some(newPlayer),Some(newRoom),None,None))
+                (s"You take the ${invItem.name} from the ${room.name}.", newDState)
+              case None => s"You cannot pick up the ${item.name}."
 
-                  (s"You take the ${invItem.name} from the ${room.name}.", newDState)
-                case None => (s"You cannot pick up the ${item.name}.", dState)
-        case None => ("What would you like to drop?", dState)
-}
 
-def dropCommand = (dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => 
+
+def dropCommand:(dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => String|(String, DataState[TxtAdvState])
+  = (dState:DataState[TxtAdvState], maybeName:Option[String], inventory:Inventory) => 
    val room = dState.value.room
       maybeName match      
+          case None => "What would you like to drop?"
           case Some(name) => inventory.getItem(name) match
-            case Left(msg) => (msg,dState)
+            case Left(msg) => msg
             case Right(item) =>  
-              val newDState = dState.map(state =>
-                val newPlayer = PlayerData(Inventory(inventory.removeItem(item)))
-                val newRoom = room.update(None,None,Some(item :: room.items))
-                state.update(Some(newPlayer),Some(newRoom),None,None))
-
+              val newPlayer = PlayerData(Inventory(inventory.removeItem(item)))
+              val newRoom = room.update(None,None,Some(item :: room.items))
+              val newDState = dState.map(_.update(Some(newPlayer),Some(newRoom),None,None))
               (s"You drop the ${item.name} in the ${room.name}.", newDState)
-          case None => ("What would you like to drop?", dState)
+          
